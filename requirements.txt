@@ -1,0 +1,13 @@
+loguru==0.5.3  # https://github.com/Delgan/loguru
+click==7.1.2
+pytest==6.2.2
+mixer==7.1.2
+
+flake8
+flake8-quotes
+flake8-blind-except
+flake8-variables-names
+flake8-commas
+flake8-fixme
+flake8-debugger
+flake8-print
