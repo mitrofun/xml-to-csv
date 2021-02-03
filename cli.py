@@ -37,6 +37,24 @@ def get_xml_encoding(file_content: bytes) -> str or None:
     return xml_encoding
 
 
+def create_players(info_part, file_name, file_date) -> PayerList:
+    payers = PayerList()
+
+    for index, item in enumerate(info_part, start=1):
+        item_values = []
+        for attribute in item:
+            item_values.append(attribute.text)
+
+        payer = Payer(index, file_name, file_date, *item_values).validate_values()
+
+        if not payer:
+            continue
+
+        payers.append(payer)
+
+    return payers
+
+
 def fill_list_of_payers_from_xml(xml_string: str, file_name: str) -> Optional[PayerList]:
     try:
         tree = ET.ElementTree(ET.fromstring(xml_string))
@@ -52,19 +70,7 @@ def fill_list_of_payers_from_xml(xml_string: str, file_name: str) -> Optional[Pa
 
     info_part = root.find('ИнфЧаст')
 
-    payers = PayerList()
-
-    for index, item in enumerate(info_part, start=1):
-        item_values = []
-        for attribute in item:
-            item_values.append(attribute.text)
-
-        payer = Payer(index, file_name, file_date, *item_values).validate_values()
-
-        if not payer:
-            continue
-
-        payers.append(payer)
+    payers = create_players(info_part, file_name, file_date)
 
     return payers
 

@@ -7,6 +7,7 @@ flake8
 flake8-quotes
 flake8-blind-except
 flake8-variables-names
+flake8-adjustable-complexity
 flake8-commas
 flake8-fixme
 flake8-debugger
